@@ -589,6 +589,7 @@ class FFN(BaseModule):
                  dropout_layer=None,
                  add_identity=True,
                  init_cfg=None,
+                 fnn_grad=True,
                  **kwargs):
         super(FFN, self).__init__(init_cfg)
         assert num_fcs >= 2, 'num_fcs should be no less ' \
@@ -609,7 +610,11 @@ class FFN(BaseModule):
             in_channels = feedforward_channels
         layers.append(Linear(feedforward_channels, embed_dims))
         layers.append(nn.Dropout(ffn_drop))
+        for layer in layers:
+            for param in layer.parameters():
+                param.requires_grad = fnn_grad
         self.layers = Sequential(*layers)
+        
         self.dropout_layer = build_dropout(
             dropout_layer) if dropout_layer else torch.nn.Identity()
         self.add_identity = add_identity

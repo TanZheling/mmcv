@@ -65,6 +65,7 @@ from .three_nn import three_nn
 from .tin_shift import TINShift, tin_shift
 from .upfirdn2d import upfirdn2d
 from .voxelize import Voxelization, voxelization
+from .softmax_entropy import softmax_entropy, SoftmaxEntropy, info_max, InfoMax
 
 __all__ = [
     'bbox_overlaps', 'CARAFE', 'CARAFENaive', 'CARAFEPack', 'carafe',
@@ -96,5 +97,6 @@ __all__ = [
     'SparseMaxPool2d', 'SparseMaxPool3d', 'SparseConvTensor', 'scatter_nd',
     'points_in_boxes_part', 'points_in_boxes_cpu', 'points_in_boxes_all',
     'points_in_polygons', 'min_area_polygons', 'active_rotated_filter',
-    'convex_iou', 'convex_giou'
+    'convex_iou', 'convex_giou',
+    'softmax_entropy', 'SoftmaxEntropy',  'info_max', 'InfoMax',
 ]

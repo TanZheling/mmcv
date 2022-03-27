@@ -34,6 +34,7 @@ def build_conv_layer(cfg, *args, **kwargs):
         cfg_ = cfg.copy()
 
     layer_type = cfg_.pop('type')
+    requires_grad = cfg_.pop('requires_grad', True)
     if layer_type not in CONV_LAYERS:
         raise KeyError(f'Unrecognized layer type {layer_type}')
     else:
@@ -41,4 +42,7 @@ def build_conv_layer(cfg, *args, **kwargs):
 
     layer = conv_layer(*args, **kwargs, **cfg_)
 
+    for param in layer.parameters():
+        param.requires_grad = requires_grad
+        
     return layer
